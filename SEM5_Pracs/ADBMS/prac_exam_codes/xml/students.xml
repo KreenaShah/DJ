@@ -1,0 +1,32 @@
+<College>
+    <Student>
+        <FirstName>Urav</FirstName>
+        <LastName> Dalal</LastName>
+        <Phone>7507160955</Phone>
+        <Address>
+            <City>Mumbai</City>
+            <Area>Sobo</Area>
+            <State>Maharashtra</State>
+        </Address>
+    </Student>
+    <Student>
+        <FirstName>Mahek</FirstName>
+        <LastName>Upadhye</LastName>
+        <Phone>7506160955</Phone>
+        <Address>
+            <City>Mumbai</City>
+            <Area>Andheri</Area>
+            <State>Maharashtra</State>
+        </Address>
+    </Student>
+    <Student>
+        <FirstName>Rishab</FirstName>
+        <LastName>Pendam</LastName>
+        <Phone>7506160955</Phone>
+        <Address>
+            <City>Mumbai</City>
+            <Area>Thane</Area>
+            <State>Maharashtra</State>
+        </Address>
+    </Student>
+<Student><FirstName>John</FirstName><LastName>Doe</LastName><Phone>123-456-7890</Phone><Address><City>New York</City><Area>Manhattan</Area><State>NY</State></Address></Student></College>

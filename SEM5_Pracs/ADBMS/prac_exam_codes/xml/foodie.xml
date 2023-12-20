@@ -1,0 +1,27 @@
+<foodMenu>
+    <food>
+        <name>cinemon bar</name>
+        <calorie>123</calorie>
+        <description>lots of cinemon</description>
+    </food>
+    <food>
+        <name>protine bar</name>
+        <calorie>90</calorie>
+        <description>high protine contents</description>
+    </food>
+    <food>
+        <name>cookies and creaml bar</name>
+        <calorie>330</calorie>
+        <description>cookie and cream goodness</description>
+    </food>
+    <food>
+        <name>chocolate bar</name>
+        <calorie>333</calorie>
+        <description>contains chocolate</description>
+    </food>
+    <food>
+        <name>fruit bar</name>
+        <calorie>250</calorie>
+        <description>contains mixed fruit flavors </description>
+    </food>
+</foodMenu>

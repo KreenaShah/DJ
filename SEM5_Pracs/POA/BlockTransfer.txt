@@ -1,0 +1,34 @@
+DATA SEGMENT
+    SEG1 DB 1H,2H,3H
+ENDS 
+
+EXTRA SEGMENT
+    SEG2 DB ?
+ENDS
+
+CODE SEGMENT
+    ASSUME CS:CODE DS:DATA
+    
+    START:
+    MOV AX,DATA
+    MOV DS,AX    
+    
+    MOV AX,EXTRA
+    MOV ES,AX
+    
+    LEA SI,SEG1
+    LEA DI,SEG2
+    
+    MOV CL,03H
+    
+    REPEAT:
+    MOV AL,DS:[SI]
+    MOV ES:[DI],AL
+    
+    INC SI
+    INC DI
+    DEC CX
+    JNZ REPEAT
+    
+CODE ENDS
+END START

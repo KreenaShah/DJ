@@ -1,0 +1,40 @@
+USE kreenashah243;
+
+CREATE TABLE usingHash (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Position VARCHAR(50),
+    Department VARCHAR(50),
+    Salary INT
+);
+
+INSERT INTO usingHash (ID, Name, Position, Department, Salary)
+VALUES 
+(1, 'Kreena Shah', 'Manager', 'Sales', 70000),
+(2, 'Arya Smith', 'Assistant Manager', 'Sales', 60000),
+(3, 'Sakshi Johnson', 'Sales Representative', 'Sales', 50000),
+(4, 'Alice Williams', 'Manager', 'Marketing', 80000),
+(5, 'Bob Brown', 'Assistant Manager', 'Marketing', 70000),
+(6, 'Charlie Davis', 'Marketing Specialist', 'Marketing', 60000),
+(7, 'David Miller', 'Manager', 'HR', 75000),
+(8, 'Eva Wilson', 'Assistant Manager', 'HR', 65000),
+(9, 'Frank Moore', 'HR Specialist', 'HR', 55000),
+(10, 'Grace Taylor', 'Manager', 'Finance', 85000),
+(11, 'Henry Anderson', 'Assistant Manager', 'Finance', 75000),
+(12, 'Irene Thomas', 'Finance Specialist', 'Finance', 65000),
+(13, 'Jack Jackson', 'Manager', 'IT', 90000),
+(14, 'Kelly White', 'Assistant Manager', 'IT', 80000),
+(15, 'Larry Harris', 'IT Specialist', 'IT', 70000),
+(16, 'Molly Clark', 'Manager', 'Operations', 80000),
+(17, 'Nancy Thompson', 'Assistant Manager','Operations' ,70000),
+(18, 'Oscar Garcia','Operations Specialist','Operations' ,60000),
+(19, 'Patricia Martinez','Manager','Customer Service' ,75000),
+(20,'Robert Robinson','Customer Service Representative','Customer Service' ,50000);
+
+ALTER TABLE usingHash PARTITION BY HASH(ID)
+PARTITIONS 4;
+
+SELECT * FROM usingHash PARTITION (p0);
+SELECT * FROM usingHash PARTITION (p1);
+SELECT * FROM usingHash PARTITION (p2);
+SELECT * FROM usingHash PARTITION (p3);

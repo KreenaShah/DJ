@@ -1,0 +1,65 @@
+{
+    "users": {
+      "user123": {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "123-456-7890",
+        "address": {
+          "street": "123 Main St",
+          "city": "Anytown",
+          "state": "CA",
+          "zip": "12345"
+        },
+        "is_active": true
+      },
+      "user456": {
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "phone": "987-654-3210",
+        "address": {
+          "street": "456 Oak St",
+          "city": "Sometown",
+          "state": "NY",
+          "zip": "56789"
+        },
+        "is_active": false
+      },
+      "user789": {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "phone": "111-222-3333",
+        "address": {
+          "street": "789 Pine St",
+          "city": "Anothercity",
+          "state": "TX",
+          "zip": "67890"
+        },
+        "is_active": true
+      },
+      "user101": {
+        "name": "Bob Wilson",
+        "email": "bob.wilson@example.com",
+        "phone": "444-555-6666",
+        "address": {
+          "street": "101 Cedar St",
+          "city": "Yetanothercity",
+          "state": "FL",
+          "zip": "34567"
+        },
+        "is_active": true
+      },
+      "user202": {
+        "name": "Eva Brown",
+        "email": "eva.brown@example.com",
+        "phone": "777-888-9999",
+        "address": {
+          "street": "202 Maple St",
+          "city": "Lastcity",
+          "state": "WA",
+          "zip": "89012"
+        },
+        "is_active": false
+      }
+    }
+  }
+  
