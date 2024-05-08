@@ -22,29 +22,16 @@ class BinaryCounter:
         return self.bits_flipped
     
     def amortized_cost(self):
-        print(self.total_cost, self.noOfIncrements)
+        # print(self.total_cost, self.noOfIncrements)
         return self.total_cost / self.noOfIncrements
     
     def get_counter(self):
         return self.counter[::-1]  # Reverse the counter before returning
 
 counter = BinaryCounter()
-
-counter.increment()
-print("Counter after 1st increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 2nd increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 3rd increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 4th increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 5th increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 6th increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 7th increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
-counter.increment()
-print("Counter after 8th increment:",  counter.get_counter(),", Cost Of this operation: ",counter.cost())
+print("CounterValue  binaryNumber    Cost")
+for i in range(1,9):
+    counter.increment()
+    print(f"{i}             {counter.get_counter()}     {counter.cost()}")
 
 print("Amortized cost", counter.amortized_cost())
