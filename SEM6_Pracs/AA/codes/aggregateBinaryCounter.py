@@ -22,7 +22,6 @@ class BinaryCounter:
         return self.bits_flipped
     
     def amortized_cost(self):
-        # print(self.total_cost, self.noOfIncrements)
         return self.total_cost / self.noOfIncrements
     
     def get_counter(self):
