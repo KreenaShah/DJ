@@ -19,8 +19,8 @@ def quickSort(arr):
         return quickSort(left) + [pivot] + quickSort(right)
 
 l = [1,2,3,4,5,6,7,8,9,10]
-sorted_list = quickSort(l)
+sorted_array = quickSort(l)
 print(c)
-print(sorted_list)
+print(sorted_array)
 
 # Randomized quicksort is a variation of the classic quicksort algorithm, designed to mitigate the algorithm's worst-case performance in certain scenarios.In the standard quicksort implementation, the algorithm's performance can degrade to O(n^2) time complexity when the input array is already sorted or reverse-sorted. This is because the pivot element is always chosen as the first or last element of the partition, leading to highly unbalanced partitions.By introducing randomization in the choice of the pivot element, the algorithm ensures that the partitions are more balanced on average, reducing the likelihood of encountering the worst-case scenario.
