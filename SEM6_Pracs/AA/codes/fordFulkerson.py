@@ -2,16 +2,16 @@ from collections import defaultdict
 
 class Graph:
     def __init__(self):
-        self.graph = defaultdict(lambda: defaultdict(int))
+        self.graph = defaultdict(lambda : defaultdict(int))
         self.nodes = set()
 
-    def add_edge(self, u, v, capacity):
+    def add_edge(self,u,v,capacity):
         self.graph[u][v] = capacity
         self.nodes.add(u)
         self.nodes.add(v)
-
-    def bfs(self, source, sink, parent):
-        visited = {node: False for node in self.nodes}
+    
+    def bfs(self,source,sink,parent):
+        visited = {node : False for node in self.nodes}
         queue = [source]
         visited[source] = True
         parent[source] = -1
@@ -19,42 +19,40 @@ class Graph:
         while queue:
             u = queue.pop(0)
             for v in self.graph[u]:
-                if not visited[v] and self.graph[u][v] > 0:
+                if not visited[v] and self.graph[u][v]>0:
                     queue.append(v)
                     visited[v] = True
                     parent[v] = u
-                    
-        return visited[sink]
 
-    def ford_fulkerson(self, source, sink):
-        parent = {node: None for node in self.nodes}
+        return visited[sink]
+    
+    def ford_fulkerson(self,source,sink):
+        parent = {node : False for node in self.nodes}
         max_flow = 0
         path_count = 0
 
-        while self.bfs(source, sink, parent):
+        while self.bfs(source,sink,parent):
             path_flow = float("Inf")
             path = []
             v = sink
-            while v != source:
+            while v!=source:
                 u = parent[v]
-                path_flow = min(path_flow, self.graph[u][v])
-                path.insert(0, u)
+                path_flow = min(path_flow,self.graph[u][v])
+                path.insert(0,u)
                 v = u
             path.append(sink)
             print(f"Augmenting Path {path_count + 1}: {' -> '.join(path)}")
 
             v = sink
-            while v != source:
+            while v!=source:
                 u = parent[v]
                 self.graph[u][v] -= path_flow
                 self.graph[v][u] += path_flow
                 v = u
-
             max_flow += path_flow
             path_count += 1
-
         return max_flow
-
+    
 g = Graph()
 g.add_edge("S", "1", 11)
 g.add_edge("S", "2", 12)
