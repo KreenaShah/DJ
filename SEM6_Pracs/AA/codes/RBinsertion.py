@@ -1,132 +1,111 @@
-# Python code for the above approach
+class Node:
+  def __init__(self, val, color):
+    self.val = val
+    self.color = color
+    self.left = None
+    self.right = None
+    self.parent = None
+
 class RedBlackTree:
-	class Node:
-		def __init__(self, data):
-			self.data = data
-			self.left = None
-			self.right = None
-			self.colour = 'R'
-			self.parent = None
+    def __init__(self):
+        self.root = None
 
-	def __init__(self):
-		self.root = None
-		self.ll = False # Left-Left Rotation flag
-		self.rr = False # Right-Right Rotation flag
-		self.lr = False # Left-Right Rotation flag
-		self.rl = False # Right-Left Rotation flag
+    def insert(self, val):
+        new_node = Node(val, "RED")
+        if not self.root:
+            self.root = new_node
+            new_node.color = "BLACK"
+            return
 
-	def rotateLeft(self, node):
-		# Perform Left Rotation
-		x = node.right
-		y = x.left
-		x.left = node
-		node.right = y
-		node.parent = x
-		if y is not None:
-			y.parent = node
-		return x
+        curr = self.root
+        parent = None
+        while curr:
+            parent = curr
+            if val < curr.val:
+                curr = curr.left
+            else:
+                curr = curr.right
 
-	def rotateRight(self, node):
-		# Perform Right Rotation
-		x = node.left
-		y = x.right
-		x.right = node
-		node.left = y
-		node.parent = x
-		if y is not None:
-			y.parent = node
-		return x
+        new_node.parent = parent
+        if val < parent.val:
+            parent.left = new_node
+        else:
+            parent.right = new_node
 
-	def insertHelp(self, root, data):
-		f = False # Flag to check RED-RED conflict
+        self._fix_violations(new_node)
 
-		if root is None:
-			return self.Node(data)
-		elif data < root.data:
-			root.left = self.insertHelp(root.left, data)
-			root.left.parent = root
-			if root != self.root:
-				if root.colour == 'R' and root.left.colour == 'R':
-					f = True
-		else:
-			root.right = self.insertHelp(root.right, data)
-			root.right.parent = root
-			if root != self.root:
-				if root.colour == 'R' and root.right.colour == 'R':
-					f = True
+    def _fix_violations(self, node):
+        while node.parent and node.parent.color == "RED":
+            if node.parent == node.parent.parent.left:
+                uncle = node.parent.parent.right
+                if uncle and uncle.color == "RED":
+                    node.parent.color, uncle.color, node.parent.parent.color = "BLACK", "BLACK", "RED"
+                    node = node.parent.parent
+                else:
+                    if node == node.parent.right:
+                        node = node.parent
+                        self._left_rotate(node)
+                    node.parent.color, node.parent.parent.color = "BLACK", "RED"
+                    self._right_rotate(node.parent.parent)
+            else:
+                uncle = node.parent.parent.left
+                if uncle and uncle.color == "RED":
+                    node.parent.color, uncle.color, node.parent.parent.color = "BLACK", "BLACK", "RED"
+                    node = node.parent.parent
+                else:
+                    if node == node.parent.left:
+                        node = node.parent
+                        self._right_rotate(node)
+                    node.parent.color, node.parent.parent.color = "BLACK", "RED"
+                    self._left_rotate(node.parent.parent)
 
-		# Perform rotations
-		if self.ll:
-			root = self.rotateLeft(root)
-			root.colour = 'B'
-			root.left.colour = 'R'
-			self.ll = False
-		elif self.rr:
-			root = self.rotateRight(root)
-			root.colour = 'B'
-			root.right.colour = 'R'
-			self.rr = False
-		elif self.rl:
-			root.right = self.rotateRight(root.right)
-			root.right.parent = root
-			root = self.rotateLeft(root)
-			root.colour = 'B'
-			root.left.colour = 'R'
-			self.rl = False
-		elif self.lr:
-			root.left = self.rotateLeft(root.left)
-			root.left.parent = root
-			root = self.rotateRight(root)
-			root.colour = 'B'
-			root.right.colour = 'R'
-			self.lr = False
+        self.root.color = "BLACK"
 
-		# Handle RED-RED conflicts
-		if f:
-			if root.parent.right == root:
-				if root.parent.left is None or root.parent.left.colour == 'B':
-					if root.left is not None and root.left.colour == 'R':
-						self.rl = True
-					elif root.right is not None and root.right.colour == 'R':
-						self.ll = True
-				else:
-					root.parent.left.colour = 'B'
-					root.colour = 'B'
-					if root.parent != self.root:
-						root.parent.colour = 'R'
-			else:
-				if root.parent.right is None or root.parent.right.colour == 'B':
-					if root.left is not None and root.left.colour == 'R':
-						self.rr = True
-					elif root.right is not None and root.right.colour == 'R':
-						self.lr = True
-				else:
-					root.parent.right.colour = 'B'
-					root.colour = 'B'
-					if root.parent != self.root:
-						root.parent.colour = 'R'
-			f = False
-		return root
+    def _left_rotate(self, node):
+        right_child = node.right
+        node.right = right_child.left
 
-	def inorderTraversalHelper(self, node):
-		if node is not None:
-			self.inorderTraversalHelper(node.left)
-			print(node.data, end=" ")
-			self.inorderTraversalHelper(node.right)
+        if right_child.left:
+            right_child.left.parent = node
+        right_child.parent = node.parent
 
-	def insert(self, data):
-		if self.root is None:
-			self.root = self.Node(data)
-			self.root.colour = 'B'
-		else:
-			self.root = self.insertHelp(self.root, data)
+        if not node.parent:
+            self.root = right_child
+        elif node == node.parent.left:
+            node.parent.left = right_child
+        else:
+            node.parent.right = right_child
+            
+        right_child.left = node
+        node.parent = right_child
 
-	def inorderTraversal(self):
-		self.inorderTraversalHelper(self.root)
+    def _right_rotate(self, node):
+        left_child = node.left
+        node.left = left_child.right
+        
+        if left_child.right:
+            left_child.right.parent = node
+        left_child.parent = node.parent
+        
+        if not node.parent:
+            self.root = left_child
+        elif node == node.parent.right:
+            node.parent.right = left_child
+        else:
+            node.parent.left = left_child
+            
+        left_child.right = node
+        node.parent = left_child
 
-t = RedBlackTree()
-arr = [10,18,7,15,16,30,25,40,60,2,1,70]
-for i in range(len(arr)):
-	t.insert(arr[i])
-	print()
-	t.inorderTraversal()
+    def inorder_traversal(self, node):
+        if node:
+            self.inorder_traversal(node.left)
+            print(f"{node.val} ({node.color})", end=" ")
+            self.inorder_traversal(node.right)
+
+tree = RedBlackTree()
+for val in [10,18,7,15,16,30,25,40,60,2,1,70]:
+  tree.insert(val)
+print("Inorder traversal of Red Black Tree:");
+
+tree.inorder_traversal(tree.root)
