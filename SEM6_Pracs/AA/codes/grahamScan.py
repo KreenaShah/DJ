@@ -31,7 +31,8 @@ def convex_hull(points):
     
     return stack
 
-points = [(0, 3), (1, 1), (2, 2), (4, 4), (0, 0), (1, 2), (3, 1), (3, 3)]
+# points = [(0, 3), (1, 1), (2, 2), (4, 4), (0, 0), (1, 2), (3, 1), (3, 3)]
+points = [(1, 1), (2, 4), (3, 2), (4, 0), (5, 1), (5, 5), (6, 3),(7,1)]
 convex_points = convex_hull(points)
 print("Convex Hull Points:")
 for point in convex_points:
