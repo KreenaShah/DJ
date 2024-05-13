@@ -1,7 +1,7 @@
-pt = input("Enter plaintext : ").lower().replace("j", "i") # Handling i/j part here itself
-key = input("Enter key : ").lower().replace("j", "i")
-# pt = "instruments"
-# key = "monarchy"
+# pt = input("Enter plaintext : ").lower().replace("j", "i") # Handling i/j part here itself
+# key = input("Enter key : ").lower().replace("j", "i")
+pt = "instruments"
+key = "monarchy"
 
 m = []  #this array initially stores all the 25 characters required for the 5x5 matrix, but not in form of matrix
 
