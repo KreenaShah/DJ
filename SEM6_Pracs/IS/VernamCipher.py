@@ -1,14 +1,37 @@
-# len(key) == len(plainText)
-pt = input("Enter plaintext : ").lower().replace(" ","")
-key = input("Enter key : ").lower().replace(" ","")
-o = ""
+def vernamEncryption(pt,key):
+    o = ""
+    # for i in range(len(pt)):
+    #     x = ord(pt[i])-ord('a')
+    #     y = ord(key[i])-ord('a')
+    #     z = x^y
+    #     w = z%26
+    #     print(x,y,z,w)
+    #     o += chr(w + ord('a'))
+    o = ''.join(chr(((ord(pt[i]) - ord('a')) ^ (ord(key[i]) - ord('a'))) + ord('a')) for i in range(len(pt)))
+    return o
 
-if(len(key)!= len(pt)):
-    print("Length of plain text and key should be of same length")
+def vernamDecryption(ct,key):
+    o = ""
+    for i in range(len(ct)):
+        x = ord(ct[i])-ord('a')
+        y = ord(key[i])-ord('a')
+        z = x^y
+        w = z%26
+        print(x,y,z,w)
+        o += chr(w + ord('a'))
+    # o = ''.join(chr(((ord(ct[i]) - ord('a')) ^ (ord(key[i]) - ord('a'))) + ord('a')) for i in range(len(ct)))
+    return o
+
+# len(key) == len(plainText)
+# pt = input("Enter plaintext : ").lower().replace(" ","")
+# key = input("Enter key (same as length of plain text) : ").lower().replace(" ","")
+pt = "kcds"
+key = "sdth"
+
+if len(key) != len(pt):
+    print("Length of plaintext and key should be the same")
 else:
-    for i in range(len(pt)):
-        b1 = bin(ord(pt[i]))
-        b2 = bin(ord(key[i]))
-        val = int(b1, 2) ^ int(b2, 2)
-        o += chr(val)
-    print(o)
+    encryptedText = vernamEncryption(pt,key)
+    print("Encrypted Text : ",encryptedText)
+    decryptedText = vernamDecryption(encryptedText,key)
+    print("Decrypted Text : ",decryptedText)
