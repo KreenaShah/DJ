@@ -15,10 +15,10 @@ def VignereDecryption(ct,key):
     return o
 
 # len(key) != len(plainText), we repeat characters of key
-# pt = input("Enter plaintext : ").lower().replace(" ","")
-# key = input("Enter key : ").lower().replace(" ","")
-pt = "wearediscoveredsaveyourself"
-key = "deceptive"
+pt = input("Enter plaintext : ").lower().replace(" ","")
+key = input("Enter key : ").lower().replace(" ","")
+# pt = "wearediscoveredsaveyourself"
+# key = "deceptive"
 
 tempKey = key
 i=0
