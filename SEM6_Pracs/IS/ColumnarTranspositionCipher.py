@@ -1,27 +1,28 @@
-def encrypt(plain_text, key):
+def encryption(pt,key):
     key_order = sorted(range(len(key)), key=lambda k: key[k])
-    cipher_text = ''
-    padding_length = len(key) - (len(plain_text) % len(key))
-    if padding_length != len(key):
-        plain_text += 'X' * padding_length
+    ct = ""
+    if len(pt)%len(key)!=0:
+        padding_length = len(key) - (len(pt) % len(key))
+        pt += 'X' * padding_length
     for i in key_order:
-        cipher_text += ''.join(plain_text[i::len(key)])
-    return cipher_text
+        ct += ''.join(pt[i::len(key)])
+    return ct
 
-def decrypt(cipher_text, key):
+def decryption(ct,key):
     key_order = sorted(range(len(key)), key=lambda k: key[k])
-    plain_text = [''] * len(cipher_text)
+    plain_text = [''] * len(ct)
     pos = 0
     for i in key_order:
         for j in range(len(key)-1):
-            plain_text[i + j * len(key)] = cipher_text[pos]
+            plain_text[i + j * len(key)] = ct[pos]
             pos += 1
     return ''.join(plain_text)
 
+# pt = input("Enter plain text : ").lower().replace(" ","")
+# key = input("Enter key : ").lower().replace(" ","")
 pt = "wearediscoveredfleeatonce"
 key = "zebras"
-
-cipher_text = encrypt(pt, key)
-print("Cipher text:", cipher_text)
-decrypted_text = decrypt(cipher_text, key)
-print("Decrypted text:", decrypted_text)
+ct = encryption(pt,key)
+print("Encrypted Text : ",ct)
+og = decryption(ct,key)
+print("Decrypted Text : ",og)

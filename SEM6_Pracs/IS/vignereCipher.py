@@ -1,24 +1,25 @@
-def VignereEncryption(pt,key):
+def encryption(pt,key):
     o = ""
     for i in range(len(pt)):
-        n1 = ord(pt[i])- ord('a')
-        n2 = ord(key[i])- ord('a')
-        o+=chr((n1 + n2) % 26 + ord('a'))
+        x = ord(pt[i])-ord('a')
+        y = ord(key[i])-ord('a')
+        z = (x+y)%26
+        o += chr(z+ord('a'))
     return o
 
-def VignereDecryption(ct,key):
+def decryption(ct,key):
     o = ""
-    for i in range(len(ct)):
-        n1 = ord(ct[i])- ord('a')
-        n2 = ord(key[i])- ord('a')
-        o+=chr((n1 - n2) % 26 + ord('a'))
+    for i in range(len(pt)):
+        x = ord(ct[i])-ord('a')
+        y = ord(key[i])-ord('a')
+        z = (x-y)%26
+        o += chr(z+ord('a'))
     return o
 
-# len(key) != len(plainText), we repeat characters of key
-pt = input("Enter plaintext : ").lower().replace(" ","")
-key = input("Enter key : ").lower().replace(" ","")
-# pt = "wearediscoveredsaveyourself"
-# key = "deceptive"
+# pt = input("Enter plain text : ").lower().replace(" ","")
+# key = input("Enter key : ").lower().replace(" ","")
+pt = "wearediscoveredsaveyourself"
+key = "deceptive"
 
 tempKey = key
 i=0
@@ -27,7 +28,7 @@ while(len(tempKey)!= len(pt)):
     i += 1
     i %= len(key)
 
-encryptedText = VignereEncryption(pt,tempKey)
-print("Encrypted Text : ",encryptedText)
-decryptedText = VignereDecryption(encryptedText,tempKey)
-print("Decrypted Text : ",decryptedText)
+ct = encryption(pt,tempKey)
+print("Encrypted Text : ",ct)
+og = decryption(ct,tempKey)
+print("Decrypted Text : ",og)
